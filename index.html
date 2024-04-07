@@ -3,30 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
     <title>Calculadora de IMC</title>
 </head>
 <body>
-    <div id="container">
-        <h1>Calculadora de IMC</h1>
-        <div>
-            <label for="peso">Peso (kg):</label>
-            <input type="number" id="peso">
-        </div>
-        <div>
-            <label for="altura">Altura (cm):</label>
-            <input type="number" id="altura">
-        </div>
-        <div>
-            <button onclick="calcularIMC()">Calcular IMC</button>
-        </div>
-        <div id="resultado"></div>
-        <div>
-            <button onclick="mostrarEstadisticasMensuales()">Ver Estadísticas Mensuales</button>
-            <button onclick="mostrarPromedioPeso()">Ver Promedio de Peso</button>
-        </div>
-        <div id="estadisticas"></div>
-    </div>
+    <main id="contenedor">
+        <section id="calculadora">
+            <form id="formulario">
+                <h1 id="titulo">Calculadora - IMC</h1>
+                <div class="input-box">
+                    <label for="peso">Peso en KG</label>
+                    <div class="input-field">
+                        <i class="fa-solid fa-weight-scale"></i>
+                        <input type="number" id="peso" required>
+                        <span>Kg</span>
+                    </div>
+                </div>
+                <div class="input-box">
+                    <label for="altura">Altura en Cm</label>
+                    <div class="input-field">
+                        <i class="fa-solid fa-ruler"></i>
+                        <input type="number" id="altura" required>
+                        <span>Cm</span>
+                    </div>
+                </div>
+                <button id="calcular">Calcular</button>
+            </form>
+            <div id="info" class="hidden">
+                <div id="resultado">
+                    <div id="imc">
+                        <span id="valor"></span>
+                        <span id="suImc"></span>
+                    </div>
+                    <div id="descripcion">
+                        <span></span>
+                    </div>                    
+                </div>
+                <div id="masInfo">
+                    <a href="https://www.healthy-heart.org/es/mantenga-su-corazon-sano/mantener-un-peso-saludable/?gad_source=1&gclid=CjwKCAjw_LOwBhBFEiwAmSEQAWnQ5Rnx5W_3TsUXE1lov5PzSgWKaxxYEXomy-FKK8_F_vKqlK6QAhoCAMYQAvD_BwE">
+                        Info sobre salud e IMC
+                        <i class="fa-solid fa-link"></i>
+                    </a>
+                </div>
+            </div>
+            <section id="registros">
+                <h2 id="titulo2">Registros de Pesos</h2>
+                <div id="formularioRegistro">
+                    <h3>Registrar Nuevo Peso</h3>
+                    <form id="formNuevoRegistro">
+                        <div class="input-box2">
+                            <i class="fa-solid fa-calendar"></i>
+                            <input type="text" id="mesRegistro" required>
+                            <label for="mesRegistro">Mes</label>
+                        </div>
+                        <div class="input-box2">
+                            <i class="fa-solid fa-weight-scale"></i>
+                            <input type="number" id="pesoRegistro" required>
+                            <label for="pesoRegistro">Peso</label>
+                        </div>
+                        <button id="registrar" type="submit">Registrar</button>
+                    </form>
+                </div>
 
+                <div id="registrosContainer"></div>
+
+
+                <div id="listaRegistros">
+                    <h3>Últimos Registros</h3>
+                    <div id="lista"></div>
+                </div>
+            </section>
+        </section>
+    </main>
     <script src="./js/main.js"></script>
 </body>
 </html>

@@ -1,161 +1,111 @@
-//FUNCIONES
+document.addEventListener("DOMContentLoaded", function() {
+    // Array para almacenar los registros de peso
+    let registrosImc = [];
 
-// Función para calcular el IMC
- function calcularImc(peso, altura) {
-    return peso / ((altura / 100) **2);
- }
-
-
-// Función para validar peso y altura dentro de rangos válidos
-function validarPesoAltura(peso, altura) {
-    return (isNaN(peso) || isNaN(altura) || peso <= 35 || peso >= 300 ||altura <= 140 ||altura >= 230); 
-}
-
-
-
-// Función para registrar un nuevo peso
-function registrarPeso(mes, peso) {
-    // Validar el mes
-    if (!mesesValidos.includes(mes.toUpperCase())) {
-        return alert("Mes no válido. Ingrese un mes entre 1 y 12.");
+    // Función para validar peso y altura dentro de rangos válidos
+    function validarPesoAltura(peso, altura) {
+        return isNaN(peso) || isNaN(altura) || peso <= 40 || peso >= 250 || altura <= 140 || altura >= 230;
     }
 
-    // Validar el peso
-    if (isNaN(peso) || peso <= 0) {
-        return alert("Peso no válido. Ingrese un peso mayor a 0.");
-    }
+    // Función para calcular el IMC
+    function calcularImc(peso, altura) {
+        const imc = peso / ((altura / 100) ** 2).toFixed(2);
+        let suImc = "";
+        let descripcion = "";
 
-    // Registrar el peso
-    registrosImc.push({ mes, peso });
-
-    // Actualizar estadísticas
-    categoriasMesesDePesaje[mes] = (categoriasMesesDePesaje[mes] || 0) + peso;
-    categoriasPesajes[mes] = (categoriasPesajes[mes] || 0) + 1;
-}
-
-// Función para calcular el total de pesajes
-function calcularTotalPesajes() {
-    return registrosImc.reduce((acc, { peso }) => acc + peso, 0).toFixed(2);
-}
-
-// Función para calcular el promedio de peso
-function calcularPromedioDePeso() {
-    return (calcularTotalPesajes() / registrosImc.length).toFixed(2);
-}
-
-// Funcion para calcular el peso mas alto
-function calcularPesoMasAlto() {
-    // Obtener solo los pesos del array registrosImc
-    const pesos = registrosImc.map(({ peso }) => peso);
-    
-    // Verificar si hay registros de peso
-    if (pesos.length === 0) {
-        return "No hay registros de peso.";
-    }
-    
-    // Calcular el peso máximo
-    const pesoMasAlto = Math.max(...pesos).toFixed(2);
-    
-    return pesoMasAlto;
-}
-
-//Funcion para calcular peso mas bajo
-function calcularPesoMasBajo() {
-    // Obtener solo los pesos del array registrosImc
-    const pesos = registrosImc.map(({ peso }) => peso);
-    
-    // Verificar si hay registros de peso
-    if (pesos.length === 0) {
-        return "No hay registros de peso.";
-    }
-    
-    // Calcular el peso mínimo
-    const pesoMasBajo = Math.min(...pesos).toFixed(2);
-    
-    return pesoMasBajo;
-}
-
-//CONSTANTES
-
-// Lista de meses válidos
-const mesesValidos = ["ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"];
-
-// VARIABLES
-let registrosImc = [];
-let categoriasMesesDePesaje = {};
-let categoriasPesajes = {};
-
-//CICLOS
-
-// Ciclo principal
-let continuar = true;
-while (continuar) {
-    let peso = parseFloat(prompt("Ingrese su peso en kg:"));
-    let altura = parseFloat(prompt("Ingrese su altura en centímetros:"));
-    
-     // Convertir altura a metros
-    if (validarPesoAltura(peso, altura)) {
-        alert("Por favor, ingrese valores válidos.");
-        continue;
-        }
-    
-    /*if (isNaN(peso) || isNaN(altura) || peso <= 35 || peso >= 300 ||altura <= 140 ||altura >= 230) {
-        alert("Por favor, ingrese valores válidos.");
-    }*/ 
-    else {
-        
-        calcularImc (peso, altura); 
-
-        let resultado = calcularImc(peso, altura);
-        console.log("Tu IMC es: " + resultado);
-
-        if (resultado < 18.5) {
-            alert("Insuficiencia Ponderal.");
-        } else if (resultado >= 18.5 && resultado <= 24.9) {
-            alert("Peso Normal.");
-        } else if (resultado >= 25 && resultado <= 29.9) {
-            alert("Sobrepeso.");
-        } else if (resultado >= 30 && resultado <= 34.9) {
-            alert("Obesidad tipo I.");
-        } else if (resultado >= 35 && resultado <= 39.9) {
-            alert("Obesidad tipo II.");
+        if (imc < 18.5) {
+            suImc = "Insuficiencia Ponderal";
+            descripcion = "Por debajo del peso normal";
+        } else if (imc >= 18.5 && imc <= 24.9) {
+            suImc = "Peso Normal";
+            descripcion = "Peso normal";
+        } else if (imc >= 25 && imc <= 29.9) {
+            suImc = "Sobrepeso";
+            descripcion = "Por encima del peso normal";
+        } else if (imc >= 30 && imc <= 34.9) {
+            suImc = "Obesidad tipo I";
+            descripcion = "Obesidad tipo I (Moderada)";
+        } else if (imc >= 35 && imc <= 39.9) {
+            suImc = "Obesidad tipo II";
+            descripcion = "Obesidad tipo II (Severa)";
         } else {
-            alert("Obesidad tipo III (mórbida)");
-        }
-    } 
-    // Registrar peso y mes
-    
-    let continuarRegistro = true;
-    do {
-        let mes = prompt("Ingrese el mes (Ej: Enero):").toUpperCase();
-        let pesoMes = parseFloat(prompt("Ingrese el peso que desea registrar:"));
-
-        if (mesesValidos.includes(mes) && !isNaN(pesoMes) && pesoMes > 0) {
-            registrarPeso(mes, pesoMes);
-        } else {
-            alert("Por favor, ingrese valores válidos para el mes y el peso.");
-            continue;
+            suImc = "Obesidad tipo III";
+            descripcion = "Obesidad tipo III (Mórbida)";
         }
 
-        let respuesta = prompt("¿Desea registrar otro peso ? (s/n)");
-        if (respuesta.toLowerCase() !== "s") {
-            continuarRegistro = false;
+        return { imc, suImc, descripcion };
+    }
+
+    const formulario = document.getElementById("formulario");
+    const pesoInput = document.getElementById("peso");
+    const alturaInput = document.getElementById("altura");
+    const infoDiv = document.getElementById("info");
+    const valorSpan = document.getElementById("valor");
+    const suImcSpan = document.getElementById("suImc");
+    const descripcionSpan = document.getElementById("descripcion");
+    const formNuevoRegistro = document.getElementById('formNuevoRegistro');
+    const registrosContainer = document.getElementById('registrosContainer');
+
+    formulario.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        // Obtener valores de peso y altura
+        const peso = parseFloat(pesoInput.value);
+        const altura = parseFloat(alturaInput.value);
+
+        // Validar peso y altura
+        if (validarPesoAltura(peso, altura)) {
+            alert("Por favor, ingrese valores válidos para el peso y la altura.");
+            return;
         }
-    } while (continuarRegistro);
 
-    let respuesta = prompt("¿Desea calcular otro IMC? (s/n)");
-    if (respuesta.toLowerCase() !== "s") {
-        break;
-    };
-};
+        // Calcular IMC
+        const resultadoImc = calcularImc(peso, altura);
+        mostrarResultado(resultadoImc);
+    });
 
-//ESTADISTICAS
-console.log("Pesajes mensuales: ", registrosImc);
-console.log("Total de pesajes en el mes: ", calcularTotalPesajes());
-console.log("Promedio de peso: ", calcularPromedioDePeso());
-console.log("Pesajes por mes: ", categoriasPesajes);
-console.log("Pesajes de cada mes: ", categoriasMesesDePesaje);
-console.log("Peso mas alto: ", calcularPesoMasAlto());
-console.log("Peso mas bajo: ", calcularPesoMasBajo());
+    function mostrarResultado(resultado) {
+        infoDiv.classList.remove("hidden");
+        valorSpan.textContent = resultado.imc.toFixed(2);
+        suImcSpan.textContent = resultado.suImc;
+        descripcionSpan.textContent = resultado.descripcion;
+    }
 
-alert("Gracias por usar CalculatorIMCpro.");
+    formNuevoRegistro.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Obtener valores de mes y peso del formulario
+        const mesRegistro = document.getElementById('mesRegistro').value;
+        const pesoRegistro = parseFloat(document.getElementById('pesoRegistro').value);
+
+        // Verificar si el peso está dentro del rango permitido
+        if (pesoRegistro <= 40 || pesoRegistro >= 250) {
+            alert('El peso debe estar entre 40 y 250 kg.');
+            return;
+        }
+
+        // Verificar si el mes ingresado es válido
+        const mesesValidos = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+        if (!mesesValidos.includes(mesRegistro.toLowerCase())) {
+            alert('Por favor, ingrese un mes válido.');
+            return;
+        }
+
+        // Llamar a la función para registrar el peso y mostrarlo en el contenedor de registros
+        registrarPeso(mesRegistro, pesoRegistro);
+    });
+
+    // Función para registrar el peso y mostrarlo en el contenedor de registros
+    function registrarPeso(mes, peso) {
+        // Crear un elemento div para el nuevo registro
+        const nuevoRegistro = document.createElement('div');
+        nuevoRegistro.textContent = `Mes: ${mes}, Peso: ${peso} kg`;
+
+        // Agregar el nuevo registro al contenedor de registros
+        registrosContainer.appendChild(nuevoRegistro);
+
+        // Limpiar los campos del formulario
+        document.getElementById('mesRegistro').value = '';
+        document.getElementById('pesoRegistro').value = '';
+    }
+});
