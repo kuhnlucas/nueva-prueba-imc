@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Array para almacenar los registros de peso
-    let registrosImc = [];
+    // Array para almacenar los registros de mes y peso
+    let registros = JSON.parse(localStorage.getItem("registros")) || [];
 
     // Función para validar peso y altura dentro de rangos válidos
     function validarPesoAltura(peso, altura) {
@@ -91,21 +91,51 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
 
-        // Llamar a la función para registrar el peso y mostrarlo en el contenedor de registros
-        registrarPeso(mesRegistro, pesoRegistro);
+        // Llamar a la función para registrar el peso
+        registrarMesYPeso(mesRegistro, pesoRegistro);
     });
 
-    // Función para registrar el peso y mostrarlo en el contenedor de registros
-    function registrarPeso(mes, peso) {
-        // Crear un elemento div para el nuevo registro
-        const nuevoRegistro = document.createElement('div');
-        nuevoRegistro.textContent = `Mes: ${mes}, Peso: ${peso} kg`;
+    // Función para registrar el mes y peso
+    const registrarMesYPeso = (mes, peso) => {
+        // Verificar si ya existe un registro para este mes
+        const mesExistente = registros.find(registro => registro.mes.toLowerCase() === mes.toLowerCase());
 
-        // Agregar el nuevo registro al contenedor de registros
-        registrosContainer.appendChild(nuevoRegistro);
+        // Si el mes ya existe, actualizar el peso
+        if (mesExistente) {
+            mesExistente.peso = peso;
+        } else {
+            // Si no existe, agregar un nuevo registro
+            registros.push({
+                mes: mes,
+                peso: peso
+            });
+        }
+
+        // Actualizar la lista de registros
+        cargarRegistros();
+
+        // Guardar los registros en el localStorage
+        localStorage.setItem("registros", JSON.stringify(registros));
 
         // Limpiar los campos del formulario
         document.getElementById('mesRegistro').value = '';
         document.getElementById('pesoRegistro').value = '';
     }
+
+    // Función para cargar los registros de mes y peso
+    const cargarRegistros = () => {
+        registrosContainer.innerHTML = "";
+        registros.forEach((registro) => {
+            let div = document.createElement("div");
+            div.classList.add("registro");
+            div.innerHTML = `
+                <h3> ${registro.mes}</h3>
+                <p> ${registro.peso} kg</p>
+            `;
+
+            registrosContainer.append(div);
+        });
+      
+    }
+
 });
