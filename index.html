@@ -10,11 +10,20 @@
     
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
     <title>Calculadora de IMC</title>
 </head>
 <body>
+    
     <main id="contenedor">
+        <section id="img">
+            <div id="contenedor-clima">
+                <h2>Clima</h2>
+                <p>Cargando...</p>
+            </div>
+            <img class="img2" src="images/1608.m00.i125.n001.P.c25.412978636 Active running woman vector illustration. Energy jogging woman design [Converted].svg" alt="">
+        </section>
         <section id="calculadora">
             <form id="formulario">
                 <h1 id="titulo">Calculadora - IMC</h1>
@@ -80,6 +89,9 @@
 
         </section>
     </main>
+
     <script src="./js/main.js"></script>
+    <script src="./js/api.js"></script>
+
 </body>
 </html>
