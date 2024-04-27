@@ -137,5 +137,67 @@ document.addEventListener("DOMContentLoaded", function() {
         });
       
     }
+    
+    const contenedorFrases = document.getElementById("frasesMotivacionales");
+    const frasesMotivacionales = [
+        '"La salud es la riqueza más grande."',
+        '"Haz del ejercicio tu hábito diario."',
+        '"El descanso adecuado es clave para un cuerpo y mente saludables."',
+        '"Come bien, vive bien."',
+        '"No se trata de tener tiempo, sino de priorizarlo."',
+        '"Tu cuerpo es tu templo. Mantenlo puro y limpio para la alma que vive dentro de ti."',
+        '"Cuida tu cuerpo. Es el único lugar que tienes para vivir."',
+        '"Haz que cada día cuente."',
+        '"El movimiento es vida."',
+        '"La fuerza no proviene de lo que puedes hacer, sino de superar lo que creías que no podías."',
+        '"El descanso es parte del entrenamiento."',
+        '"Nunca es tarde para empezar a cuidar de ti mismo."',
+        '"Cuida tu cuerpo como si fueras a vivir en él eternamente."',
+        '"El equilibrio es la clave de una vida saludable."',
+        '"El ejercicio no solo cambia tu cuerpo, también cambia tu mente, tu actitud y tu estado de ánimo."',
+        '"Sueña en grande, comienza pequeño, actúa ahora."',
+        '"La nutrición adecuada es la base para una vida saludable."',
+        '"El mejor momento para cuidar de ti mismo fue ayer. El siguiente mejor momento es ahora."',
+        '"No te rindas. El principio siempre es lo más difícil."',
+        '"La felicidad es un estado de bienestar físico, mental y social."',
+        '"Cada pequeño paso te acerca a grandes resultados."',
+        '"La salud es un viaje, no un destino."',
+        '"Haz de la actividad física tu medicina diaria."',
+        '"Dormir lo suficiente es esencial para recargar tu cuerpo y mente."',
+        '"Los cambios positivos comienzan con decisiones positivas."',
+        '"Elige cuidarte a ti mismo todos los días."',
+        '"La alimentación saludable es un acto de amor propio."',
+        '"No te compares con los demás, compite contigo mismo."',
+        '"La vida es lo que haces de ella. Mantén una actitud positiva y haz lo mejor con lo que tienes."',
+        '"El ejercicio no solo alarga la vida, sino que la hace más feliz y placentera."',
+        '"No se trata de ser perfecto, se trata de ser mejor que ayer."',
+        '"La vida es un viaje. Disfruta del viaje mientras trabajas para alcanzar tus objetivos."',
+        '"Tu cuerpo puede hacer cualquier cosa, es tu mente la que necesitas convencer."',
+        '"La salud es la verdadera riqueza."',
+        '"Cuida tus pensamientos, porque se convertirán en tus palabras. Cuida tus palabras, porque se convertirán en tus acciones. Cuida tus acciones, porque se convertirán en tus hábitos. Cuida tus hábitos, porque se convertirán en tu destino."',
+        '"La determinación y el esfuerzo constante son la clave del éxito en cualquier objetivo de salud."',
+        '"La alimentación saludable es la mejor medicina preventiva."',
+        '"El dolor que sientes hoy será tu fuerza mañana."',
+        '"Invierte en ti mismo. Es la mejor inversión que jamás harás."',
+        '"La motivación es lo que te pone en marcha. El hábito es lo que te mantiene en marcha."',
+        '"Nunca subestimes el poder de un pequeño cambio."',
+        '"El bienestar físico es la base de una vida plena y feliz."',
+        '"Tu cuerpo es un reflejo directo de tus elecciones de estilo de vida."',
+        '"El bienestar mental es tan importante como el bienestar físico."',
+        '"Cada paso que das te acerca a tus metas. No te detengas."',
+        '"La perseverancia es la clave del éxito en cualquier aspecto de la vida."',
+        '"La disciplina es el puente entre metas y logros."',
+        '"La vida es un regalo. Aprecia cada momento."',
+        '"Escucha a tu cuerpo. Te está hablando."'
+    ];
 
+    const intervalo = setInterval(function() {
+        const indiceAleatorio = Math.floor(Math.random() * frasesMotivacionales.length);
+        const fraseAleatoria = frasesMotivacionales[indiceAleatorio];
+        contenedorFrases.textContent = fraseAleatoria;
+    }, 50000);
+
+
+    
 });
+

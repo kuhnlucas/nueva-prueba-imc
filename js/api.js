@@ -2,7 +2,7 @@ const contenedorClima = document.getElementById('contenedor-clima');
 
 const apiKey = 'c18c257f3235478fb03223818241604'; 
 const location2 ='Posadas, Misiones'; // Reemplaza con la ubicación para la que deseas obtener el clima
-const apiUrl = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=auto:ip`;
+const apiUrl = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location2}`;
 
 
 function api () {

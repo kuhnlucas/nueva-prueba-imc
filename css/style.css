@@ -1,11 +1,15 @@
-body{
+
+body {
     display: flex;
-    flex-direction: row;
+    flex-direction: column; 
     align-items: center;
     justify-content: center;
     background-color: #18181b;
-    padding-top: 5rem;
+    padding-top: 2rem;
+    margin: 0; 
 }
+
+
 
 #contenedor {
     display: flex;
@@ -305,23 +309,72 @@ h1,h2,h3,p {
     margin-top: 1rem; /* Espaciado superior */
 }
 
-/*responsive*/
+
+#frasesMotivacionales  {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff !important;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: bold; /* Cambia el color del texto a blanco */
+    gap: 1rem;
+    background-color: #262626;
+    border-radius: 8px;
+    box-shadow: 6px 6px 4px rgba(94, 94, 94, 0.1);
+    width: 25rem; /* Ajusta el ancho según sea necesario */
+    margin-bottom: 30px;
+}
+
+
+/*responsive
 
 @media only screen and (max-width: 600px) {
     #contenedor {
       flex-direction: column;
-      gap: 1.5rem; /* Reducir el espacio entre los contenedores en dispositivos móviles */
+      gap: 1.5rem; /* Reducir el espacio entre los contenedores en dispositivos móviles 
     }
   
     #img {
-      display: none; /* Ocultar la sección de la imagen en dispositivos móviles */
+      display: none; / Ocultar la sección de la imagen en dispositivos móviles 
     }
   
     #calculadora {
-      width: 100%; /* Ajustar el ancho del contenedor de la calculadora al 100% en dispositivos móviles */
+      width: 100%; /* Ajustar el ancho del contenedor de la calculadora al 100% en dispositivos móviles 
     }
   
     #contenedor-clima {
-      width: 100%; /* Ajustar el ancho del contenedor de clima al 100% en dispositivos móviles */
+      width: 100%; /* Ajustar el ancho del contenedor de clima al 100% en dispositivos móviles 
+    }
+  }
+  
+  */
+
+ /* Estilos para dispositivos móviles */
+@media only screen and (max-width: 600px) {
+    /* Contenedor principal */
+    body {
+      display: flex;
+      flex-direction: column; /* Cambiar la dirección del flex a column */
+      align-items: center;
+    }
+  
+    /* Contenedor de frase motivacional */
+    #frasesMotivacionales {
+      width: 90%; /* Ancho del contenedor */
+      margin-bottom: 20px; /* Espacio inferior entre contenedores */
+    }
+  
+    /* Contenedor de clima */
+    #contenedor-clima {
+      width: 90%; /* Ancho del contenedor */
+      margin-bottom: 20px; /* Espacio inferior entre contenedores */
+    }
+  
+    /* Contenedor de cálculo de IMC con registro */
+    #contenedor-imc {
+      width: 90%; /* Ancho del contenedor */
+      margin-bottom: 20px; /* Espacio inferior entre contenedores */
     }
   }
